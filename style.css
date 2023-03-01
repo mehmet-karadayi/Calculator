@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body{
-    background-color: #a0ced9;;
+    background-color: #a0ced9;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-image: url(images/pattern.png);
+    background-repeat: repeat;
 }
 
 .container {
