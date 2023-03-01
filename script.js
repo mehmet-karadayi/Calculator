@@ -100,6 +100,7 @@ pwr.addEventListener('click', () => {
     else {
         powerOn = false;
         display('');
+        reset();
     }
 });
 
