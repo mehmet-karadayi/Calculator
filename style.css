@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Tilt+Warp&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gajraj+One&family=Press+Start+2P&family=Tilt+Warp&display=swap');
 
 body{
     background-color: #a0ced9;
@@ -21,22 +21,38 @@ body{
     flex-direction: column;
     padding-top: 50px;
     align-items: center;
-    background-color:#fdf3b1;
+    background-color:#dbcf83;
     padding-top: 100px;
     padding-bottom: 20px;
     box-shadow: 15px 15px 10px black;
     
 }
 
-#brand {
+#brandSection {
     border: 1px solid #3a3a39;
     width : 90%;
     height: 50px;
     display: flex;
-    justify-content:flex-end;
+    align-items: center;
     background-color: rgb(27, 26, 26);
+}
 
+#brand{
+    margin-left: 15%;
+    justify-content: flex-start;
+    align-content: flex-start;
+    height: 90%;
+}
 
+#model {
+    width: 100%;
+    margin-right: 8%;
+    color: rgb(171, 171, 171);
+    font-weight: 900;
+    font-size: larger;
+    display: flex;
+    justify-content: flex-end;
+    font-family: "gajraj One";
 }
 
 #screen {
