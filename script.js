@@ -59,6 +59,7 @@ const screen = document.getElementById("outputWindow");
 
 const exponent = document.getElementsByClassName('exponent operator')[0];
 exponent.addEventListener('click', () => {
+    if (input1 === "") return;
     if (expressionCheck()) {
         solve();
         input1 = displayVal;
@@ -66,11 +67,15 @@ exponent.addEventListener('click', () => {
     }
     if (operator === undefined) {
         operator = 'power';
+    }
+    if( input1 === "" && input2 ===""){
+        return;
     }
 });
 
 const division = document.getElementsByClassName('divide operator')[0];
 division.addEventListener('click', () => {
+    if (input1 === "") return;
     if (expressionCheck()) {
         solve();
         input1 = displayVal;
@@ -78,10 +83,14 @@ division.addEventListener('click', () => {
     }
     if (operator === undefined) {
         operator = 'divide';
+    }
+    if( input1 === "" && input2 ===""){
+        return;
     }
 });
 const multip = document.getElementsByClassName('multiply operator')[0];
 multip.addEventListener('click', () => {
+    if (input1 === "") return;
     if (expressionCheck()) {
         solve();
         input1 = displayVal;
@@ -89,6 +98,9 @@ multip.addEventListener('click', () => {
     }
     if (operator === undefined) {
         operator = 'multiply';
+    }
+    if( input1 === "" && input2 ===""){
+        return;
     }
 });
 const pwr = document.getElementsByClassName('power operator')[0];
@@ -103,6 +115,94 @@ pwr.addEventListener('click', () => {
         reset();
     }
 });
+
+const sub = document.getElementsByClassName('subtract operator')[0];
+sub.addEventListener('click', () => {
+    if (input1 === "") {
+        inputCheck("-");
+        console.log("Hello");
+        return;
+    }
+    if (input1 !== "" && input2 === "" && operator !== undefined) {
+        inputCheck("-");
+        console.log("Hi");
+        return;
+    }
+    if (expressionCheck()) {
+        solve();
+        input1 = displayVal;
+        operator = 'subtract';
+    }
+    if (operator === undefined) {
+        operator = 'subtract';
+    }
+    if( input1 === "" && input2 ===""){
+        return;
+    }
+});
+
+const addition = document.getElementsByClassName('add operator')[0];
+addition.addEventListener('click', () => {
+    if (input1 === "") return;
+    if (expressionCheck()) {
+        solve();
+        input1 = displayVal;
+        operator = 'add';
+    }
+    if (operator === undefined) {
+        operator = 'add';
+    }
+    if( input1 === "" && input2 ===""){
+        return;
+    }
+
+});
+
+
+function reset() {
+    input1 = "";
+    input2 = "";
+    operator = undefined;
+
+}
+
+function expressionCheck() {
+    if (input1 !== "" && input2 !== "" && operator !== undefined) {
+        return true;
+    }
+    return false;
+}
+
+function display(val) {
+    if (val.length >18){
+        val = "ERR: OVERFLOW";
+    }
+    screen.textContent = val;    
+    document.getElementById("screen").appendChild(screen);
+    displayVal = val;
+
+}
+
+function inputCheck(val) {
+    if (powerOn === true) {
+        if (operator === undefined) {
+            if (val === '.'  && input1.indexOf('.') !== -1 || val === '-'  && input1.indexOf('-') !== -1) {
+                return;
+            }
+            input1 += val;
+            display(input1)
+        }
+        else {
+            if (val === '.'  && input2.indexOf('.') !== -1 || val === '-'  && input2.indexOf('-') !== -1) {
+                return;
+            }
+            input2 += val;
+            display(input2);
+        }
+    }
+}
+
+
 
 const one = document.getElementsByClassName('1 num')[0];
 one.addEventListener('click', () => {
@@ -160,85 +260,17 @@ clear.addEventListener('click', () => {
     reset();
 
 });
-const sub = document.getElementsByClassName('subtract operator')[0];
-sub.addEventListener('click', () => {
-    if (expressionCheck()) {
-        solve();
-        input1 = displayVal;
-        operator = 'subtract';
-    }
-    if (operator === undefined) {
-        operator = 'subtract';
-    }
-});
-const addition = document.getElementsByClassName('add operator')[0];
-addition.addEventListener('click', () => {
-    if (expressionCheck()) {
-        solve();
-        input1 = displayVal;
-        operator = 'add';
-    }
-    if (operator === undefined) {
-        operator = 'add';
-    }
-
-});
 
 const dot = document.getElementsByClassName('decimal num')[0];
 dot.addEventListener('click', () => {
-    if (displayVal.toString().indexOf('.') === -1) {
-        inputCheck('.');
-    }
-
+    inputCheck('.');
+       
 });
 
 const equal = document.getElementsByClassName('solution')[0];
 equal.addEventListener('click', () => {
-    if (input1 !== "" && input2 !== "" && operator !== undefined) {
-        let result = operate(operator, Number(input1), Number(input2)).toString();
-        displayVal = result;
-        if (result.indexOf('.') !== -1) {
-            display(Number(result).toFixed(2));
-        }
-        else {
-            display(result);
-        }
-    }
-    reset();
+    solve();
 });
-
-function reset() {
-    input1 = "";
-    input2 = "";
-    operator = undefined;
-
-}
-
-function expressionCheck() {
-    if (input1 !== "" && input2 !== "" && operator !== undefined) {
-        return true;
-    }
-    return false;
-}
-
-function display(val) {
-    screen.textContent = val;
-    document.getElementById("screen").appendChild(screen);
-
-}
-
-function inputCheck(val) {
-    if (powerOn === true) {
-        if (operator === undefined) {
-            input1 += val;
-            display(input1)
-        }
-        else {
-            input2 += val;
-            display(input2);
-        }
-    }
-}
 
 
 function operate(operator, input1, input2) {
@@ -275,4 +307,5 @@ function solve() {
 
     }
     reset();
+    console.log([input1, input2, displayVal,operator]);
 }
